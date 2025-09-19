@@ -13,6 +13,13 @@ $subject = $row["subject"];        // 제목
 $content = $row["content"];        // 내용
 $is_html = $row["is_html"];
 $check_fix = $row["check_fix"];
+
+if($check_fix == "1"){
+    $checked = "checked";
+}
+else {
+    $checked = "";
+}
 // HTML 쓰기
 if ($is_html == "y")
     $html_checked = "checked";
@@ -67,19 +74,19 @@ mysqli_close($con);
             <li>
                 <span class="col1">파일 삭제: </span>
                 <span class="col2">
-                    <input type="checkbox" name="del_file" value="1">
                     <?php
-                    echo "<a href='delete_file.php?table=$table&num=$num&page=$page'>삭제</a>";
+                    echo "<a href='delete_file.php?table=$table&num=$num&page=$page'><button type='button'>삭제</button></a>";
                     ?>
                 </span>
             </li>
             <li>
                 <span class="col1">새 파일 업로드:</span>
-                <span class="col2">새 파일 업로드: <input type="file" name="upfile"></span>
+                <span class="col2"><input type="file" name="upfile"></span>
+
             </li>
             <li>
                 <span class="col1">필독: </span>
-                <span class="col2"><input type="checkbox" name="check_fix" value="1"></span>
+                <span class="col2"><input type="checkbox" name="check_fix" <?= $checked?>></span>
             </li>
         </ul>
     </div>

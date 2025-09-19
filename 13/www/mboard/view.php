@@ -119,6 +119,7 @@ $file_copied = $row["file_copied"];
         echo $content;
         ?> <!-- 내용 출력 -->
     </li>
+
 </ul>
 
 <!-- view ripple -->
@@ -175,7 +176,7 @@ if ($table == "_qna") {
         </form>
     </div>
     <?php
-} // end of if ($table=="_qna")
+}
 ?>
 
 <ul class="buttons">
@@ -189,7 +190,7 @@ if ($table == "_qna") {
         <button onclick="location.href='<?= $list_url ?>'">목록보기</button>
     </li>
     <?php
-    if ($userlevel == 1 or $userid == $id) {
+    if ($userid == $id) {
         ?>
         <li>
             <button onclick="location.href='<?= $modify_url ?>'">수정하기</button>

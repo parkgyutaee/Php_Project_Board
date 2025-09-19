@@ -48,18 +48,6 @@ else {
 $regist_day = date("Y-m-d (H:i)");  // UTC 기준 현재의 '년-월-일 (시:분)'
 
 include "../include/db_connect.php";
-
-// 삭제 조건문
-if (isset($_POST["del_file"]) && $_POST["del_file"] == "1") {
-    $sql = "SELECT file_copied FROM $table WHERE num=$num";
-    $result = mysqli_query($con, $sql);
-    $row = mysqli_fetch_assoc($result);
-    if ($row["file_copied"] && file_exists("13/www/mboard/data/" . $row["file_copied"])) {
-        unlink("13/www/mboard/data/" . $row["file_copied"]);
-    }
-    $sql = "UPDATE $table SET file_name='', file_copied='' WHERE num=$num";
-    mysqli_query($con, $sql);
-}
 //수정 조건문
 if (isset($_FILES["upfile"]) && $_FILES["upfile"]["error"] == 0) {
     $upfile_name = $_FILES["upfile"]["name"];
