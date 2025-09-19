@@ -72,7 +72,7 @@ header .main_menu li { font-size: 18px; font-weight: bold; margin-right: 40px; }
 .ripple_title span { display: inline-block; }
 .ripple_title .col1 { width: 100px; }
 .ripple_title .col3 {  float: right; }
-.ripple_content { margin: 0 30px; border-bottom: dotted 1px #cccccc; padding-bottom: 20px; }
+.ripple_content {   margin: 0; border-bottom: dotted 1px #cccccc;padding-bottom: 20px; }
 .ripple_box { height:120px; padding:14px; margin: 30px; background-color:#efefef; border-top: solid 1px #cccccc; }
 .ripple_box1 { float:left; width:18%; }
 .ripple_box2 { float:left; width:72%; padding-left:5px; }

@@ -22,6 +22,8 @@
 		exit;
 	}
 
+
+
 	$table = $_GET["table"];
 	$num = $_GET["num"];
 	$page = $_GET["page"];

@@ -1,3 +1,34 @@
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    function modify_ripple(ripple_num) {
+        let ripple_box = $("#ripple_content_" + ripple_num);
+        let Content = ripple_box.text();
+
+        ripple_box.html(
+            "<textarea id='modify_text_" + ripple_num + "' style='width:80%;'>" + Content + "</textarea>" +
+            "<button onclick='update_ripple(" + ripple_num + ")'>저장</button>"
+        );
+    }
+
+    function update_ripple(ripple_num) {
+        let Content = $("#modify_text_" + ripple_num).val();
+
+        $.ajax({
+            url: "modify_ripple_ajax.php",
+            method: "POST",
+            data: {
+                ripple_num: ripple_num,
+                ripple_content: Content,
+                table: "<?=$table?>"
+            },
+            success: function(response) {
+                $("#ripple_content_" + ripple_num).html(response);
+            }
+        });
+    }
+</script>
+
 <?php
 $num = $_GET["num"];
 
@@ -22,7 +53,7 @@ $cookie_name = "viewed_" . $table . "_" . $num;
 if (!isset($_COOKIE[$cookie_name])) {
     $sql = "UPDATE $table SET count_saw = count_saw + 1 WHERE num=$num";
     mysqli_query($con, $sql);
-    setcookie($cookie_name, "1", time() + 3600, "/");
+    setcookie($cookie_name, "$cookie_name", time() + 3600);
 }
 
 $sql = "select * from $table where num=$num";    // 레코드 검색
@@ -110,21 +141,23 @@ if ($table == "_qna") {
         $ripple_content = str_replace(" ", "&nbsp;", $ripple_content);
         $ripple_date = $row_ripple["regist_day"];
         ?>
-        <div class="ripple_title">
+        <div class="ripple_title" <?php if($userid == $ripple_id) {echo"style='background-color: lightblue;'";}?>>
             <span class="col1"><?= $ripple_name ?></span>
             <span class="col2"><?= $ripple_date ?></span>
             <span class="col3">
 			        <?php
-                    if ($userlevel == 1 or $userid == $ripple_id)
+                    if ($userid == $ripple_id) {
+                        echo "<a href='javascript:void(0);' onclick='modify_ripple($ripple_num)'>수정</a>  ";
+                        echo "| ";
                         echo "<a href='delete_ripple.php?table=$table&num=$num&ripple_num=$ripple_num&page=$page'>삭제</a>";
-                    else
-                        echo "<a href='#'>삭제</a>";
+                    }
                     ?>
 			    </span>
         </div>
-        <div class="ripple_content">
-            <?= $ripple_content ?>
-        </div>
+<div class="ripple_content" id="ripple_content_<?= $ripple_num ?>" <?php if($userid == $ripple_id) {echo"style='background-color: lightblue;'";}?>>
+<?= $ripple_content ?>
+</div>
+
         <?php
         $count++;
     }

@@ -1,6 +1,5 @@
 <ul class="board_list">
     <h2><?= $board_title ?> > 목록보기</h2>
-    <form action=""></form>
     <li>
         <span class="col1">번호</span>
         <span class="col2">제목</span>

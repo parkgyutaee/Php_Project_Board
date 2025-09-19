@@ -46,9 +46,7 @@ mysqli_close($con);
         <ul>
             <li>
                 <span class="col1">이름 : </span>
-                <span class="col2"><?= $name ?>
-					<span class="is_html"><input type="checkbox" name="is_html" value="y" <?= $html_checked ?>> HTML 쓰기</span>
-				</span>
+                <span class="col2"><?= $name ?></span>
             </li>
             <li>
                 <span class="col1">제목 : </span>
@@ -63,13 +61,21 @@ mysqli_close($con);
             <li>
                 <span class="col1">첨부 파일 : </span>
                 <span class="col2">
-                    <?php if ($file_name) { ?>
-                        <?= $file_name ?>&nbsp;&nbsp;&nbsp;
-                        파일 삭제<input type="checkbox" name="del_file" value="1">
-                        &nbsp;&nbsp;&nbsp;
-                    <?php } ?>
-                    새 파일 업로드: <input type="file" name="upfile">
+                    <?= $file_name ?>
                 </span>
+            </li>
+            <li>
+                <span class="col1">파일 삭제: </span>
+                <span class="col2">
+                    <input type="checkbox" name="del_file" value="1">
+                    <?php
+                    echo "<a href='delete_file.php?table=$table&num=$num&page=$page'>삭제</a>";
+                    ?>
+                </span>
+            </li>
+            <li>
+                <span class="col1">새 파일 업로드:</span>
+                <span class="col2">새 파일 업로드: <input type="file" name="upfile"></span>
             </li>
             <li>
                 <span class="col1">필독: </span>
